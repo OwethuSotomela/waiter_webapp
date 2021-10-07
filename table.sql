@@ -9,23 +9,29 @@ drop table if exists daysWaiters;
 create table daysWaiters (
 	id serial not null primary key,
     daysAvailable varchar(255) not null unique,
-    counter int NULL
+    counter int not NULL
 );
 
 drop table if exists daysSelected;
 create table daysSelected (
 	id serial not null primary key,
-    selectedDays varchar(255) not null,
-    username varchar(255) not null
+	username varchar(255) not null unique,
+    Monday varchar(255)  null,
+    Tuesday varchar(255)  null,
+    Wednesday varchar(255)  null,
+    Thursday varchar(255)  null,
+    Friday varchar(255)  null,
+    Saturday varchar(255)  null,
+    Sunday varchar(255)  null
 );
 
-INSERT INTO daysWaiters (daysAvailable) VALUES ('Monday');
-INSERT INTO daysWaiters (daysAvailable) VALUES ('Tuesday');
-INSERT INTO daysWaiters (daysAvailable) VALUES ('Wednesday');
-INSERT INTO daysWaiters (daysAvailable) VALUES ('Thursday');
-INSERT INTO daysWaiters (daysAvailable) VALUES ('Friday');
-INSERT INTO daysWaiters (daysAvailable) VALUES ('Saturday');
-INSERT INTO daysWaiters (daysAvailable) VALUES ('Sunday');
+INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Monday', 0);
+INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Tuesday', 0);
+INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Wednesday', 0);
+INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Thursday', 0);
+INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Friday', 0);
+INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Saturday', 0);
+INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Sunday', 0);
 
 INSERT INTO waiters (username, names) VALUES ('OwSoto', 'Owethu Sotomela');
 INSERT INTO waiters (username, names) VALUES ('Wethu', 'Ohworthy SotoKnife');

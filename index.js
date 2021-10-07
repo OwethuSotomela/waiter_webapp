@@ -34,7 +34,6 @@ const pool = new Pool({
 });
 
 var waiterCallBack = waiter(pool);
-console.log(pool);
 
 app.get('/', function(req, res){
     res.render('index');
@@ -53,7 +52,6 @@ app.post('/waiter', async function(req, res, next){
             req.flash('alert', 'Only authorised personnel')
             res.redirect('/')
         }
-        console.log(result)
         res.render('waiter', {
             results: result,
         }); 
@@ -66,13 +64,20 @@ app.get('/waiters/:username', async function(req, res){
     res.render('/')
 })
 
-app.post('/waiters/:username', async function(req, res){
-    var Days = { Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday}
-    console.log(Days)
-    var checked = (Days == undefined);
-    console.log(checked)
-
-    res.render('waiter', {workDays: await waiterCallBack.getSelected(Days)})
+app.post('/waiters/:username', async function(req, res, next){
+    try {
+            var Days = {username:req.params.username, Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday}
+            await waiterCallBack.getSelected(Days)
+            var workDays = await waiterCallBack.userDaysSelected(req.params.username)
+            var results = await waiterCallBack.waiterFunction(req.params.username)
+            console.log(results)
+            res.render('waiter', { 
+            results: results,
+            workDays: workDays
+        })
+    } catch (error) {
+        next(error);
+    }
 })
 
 app.get('/days', function(req, res){
