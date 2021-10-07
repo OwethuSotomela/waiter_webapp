@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="row">
+        {{#if messages.alert}}
+        <div class="alert">{{messages.alert}}</div>
+        {{/if}}
+        <form action="/waiter" method="post">
+            <div class="col-12">
+                <input type="text" name="username" id="username">
+                <button type="submit">Waiter</button>
+            </div>
+        </form>
+        <br>
+        <br>
+        <form action="/days" method="get">
+            <div class="col-12">
+
+                <button type="submit">Owner</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

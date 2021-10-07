@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-12">
+    {{#each results}}
+        <h1>Welcome {{names}}</h1>
+        <form action="/waiters/{{username}}" method="POST">
+    {{/each}}
+            <input type="checkbox" name="Monday" id="Monday" value="Monday">Monday
+            <input type="checkbox" name="Tuesday" id="Tuesday" value="Tuesday">Tuesday
+            <input type="checkbox" name="Wednesday" id="Wednesday" value="Wednesday">Wednesday
+            <input type="checkbox" name="Thursday" id="Thursday" value="Thursday">Thursday
+            <input type="checkbox" name="Friday" id="Friday" value="Friday">Friday
+            <input type="checkbox" name="Saturday" id="Saturday" value="Saturday">Saturday
+            <input type="checkbox" name="Sunday" id="Sunday" value="Sunday">Sunday
+            <br>
+            <br>
+            <button type="submit">Submit Days</button>
+        </form>
+    </div>
+    <div class="col-12">
+        {{workDays}} aowa
+    </div>
+</div>
