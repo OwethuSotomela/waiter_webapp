@@ -22,13 +22,13 @@ module.exports = function waiterApp(pool) {
     }
 
     async function userDaysSelected(username) {
-        var results = await pool.query("SELECT * FROM daysSelected WHERE username=$1", [username]);
+        var results = await pool.query("SELECT * FROM daysSelected WHERE username = $1", [username]);
         return results.rows;
     }
 
     async function getSelected(nameOfWaiter){
 
-        var daysWaiters = await pool.query("SELECT * FROM daysWaiters WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4  OR daysAvailable = $5  OR daysAvailable =$6  OR daysAvailable =$7)",[
+        var daysWaiters = await pool.query("SELECT * FROM daysWaiters WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4 OR daysAvailable = $5  OR daysAvailable =$6  OR daysAvailable =$7)",[
                 nameOfWaiter.Monday,
                 nameOfWaiter.Tuesday,
                 nameOfWaiter.Wednesday,
@@ -38,7 +38,7 @@ module.exports = function waiterApp(pool) {
                 nameOfWaiter.Sunday,
         ]);
         if (daysWaiters.rows.length > 0) {
-            await pool.query("UPDATE daysWaiters SET counter = counter + 1 WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4  OR daysAvailable = $5  OR daysAvailable =$6  OR daysAvailable =$7)",[
+            await pool.query("UPDATE daysWaiters SET counter = counter + 1 WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4 OR daysAvailable = $5 OR daysAvailable = $6  OR daysAvailable = $7)",[
                 nameOfWaiter.Monday,
                 nameOfWaiter.Tuesday,
                 nameOfWaiter.Wednesday,
@@ -62,9 +62,7 @@ module.exports = function waiterApp(pool) {
             ]);
         } else {
         }
-        
-        
-        // return await getAllDaysSelected()
+    
     }
 
     return {

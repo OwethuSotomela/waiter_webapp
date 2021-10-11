@@ -39,10 +39,6 @@ app.get('/', function(req, res){
     res.render('index');
 })
 
-app.get('/waiter', function(req, res){
-    res.render('waiter');
-})
-
 app.post('/waiter', async function(req, res, next){
     try {
         var waiter = req.body.username;
@@ -60,10 +56,6 @@ app.post('/waiter', async function(req, res, next){
     }
 });
 
-app.get('/waiters/:username', async function(req, res){
-    res.render('/')
-})
-
 app.post('/waiters/:username', async function(req, res, next){
     try {
             var Days = {username:req.params.username, Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday}
@@ -71,9 +63,11 @@ app.post('/waiters/:username', async function(req, res, next){
             var workDays = await waiterCallBack.userDaysSelected(req.params.username)
             var results = await waiterCallBack.waiterFunction(req.params.username)
             console.log(results)
+            console.log(workDays)
+            console.log(Days)
             res.render('waiter', { 
-            results: results,
-            workDays: workDays
+            results: await waiterCallBack.waiterFunction(req.params.username),
+            workDays: await waiterCallBack.userDaysSelected(req.params.username)
         })
     } catch (error) {
         next(error);
