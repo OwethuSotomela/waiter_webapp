@@ -19,10 +19,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(flash());
 
-
 app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
-
 
 const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/waiter';
 
@@ -72,19 +70,32 @@ app.post('/waiters/:username', async function(req, res, next){
     } catch (error) {
         next(error);
     }
-})
+});
 
 app.post('/reset/:username', async function(req, res){
     await waiterCallBack.emptyDB()
     res.render('waiter')
+});
+
+app.get('/back/:username', function(req, res){
+    res.redirect('/waiters/:username')
+});
+
+app.get('/home', function(req, res){
+    res.redirect('/')
+});
+
+app.get('/days', async function(req, res){
+    console.log(await waiterCallBack.getAllDaysAvailable())
+    res.render('days', {
+        workDays: await waiterCallBack.getAllDaysAvailable()
+    })
 })
 
-app.post('/back', function(req, res){
-    res.render('waiter')
-})
-
-app.get('/days', function(req, res){
-    res.render('/')
+app.get('/days/:dayOfTheWeek', async function(req, res){
+    res.render('days', {
+        workDays: await waiterCallBack.getAllDaysAvailable()
+    })
 })
 
 const PORT = process.env.PORT || 1616;
