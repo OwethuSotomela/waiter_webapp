@@ -73,6 +73,11 @@ module.exports = function waiterApp(pool) {
         return results.rows;
     }
 
+    async function getAllWaitersByDay(day) {
+        var results = await pool.query("SELECT * FROM daysSelected WHERE (Monday= $1 OR Tuesday= $1 OR Wednesday= $1 OR Thursday= $1 OR Friday= $1 OR Saturday= $1 OR Sunday= $1)", [day]);
+        return results.rows;
+    }
+
     async function emptyDB(){
         await pool.query("DELETE FROM daysSelected")
     }
@@ -84,6 +89,7 @@ module.exports = function waiterApp(pool) {
         getAllDaysSelected,
         userDaysSelected,
         emptyDB,
-        getAllDaysAvailable
+        getAllDaysAvailable,
+        getAllWaitersByDay
     }
 }
