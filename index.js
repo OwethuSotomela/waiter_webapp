@@ -98,6 +98,12 @@ app.get('/days/:dayOfTheWeek', async function(req, res){
     })
 })
 
+app.post('/daysavailable/:daysavailable', async function(req, res){
+    res.render('daysavailable', {
+        workDays: await waiterCallBack.getAllWaitersByDay(req.params.daysavailable)
+    })
+})
+
 const PORT = process.env.PORT || 1616;
 app.listen(PORT, function(){
     console.log("App started at port:", PORT)
