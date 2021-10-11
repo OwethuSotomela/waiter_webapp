@@ -37,6 +37,8 @@ module.exports = function waiterApp(pool) {
                 nameOfWaiter.Saturday,
                 nameOfWaiter.Sunday,
         ]);
+
+
         if (daysWaiters.rows.length > 0) {
             await pool.query("UPDATE daysWaiters SET counter = counter + 1 WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4 OR daysAvailable = $5 OR daysAvailable = $6  OR daysAvailable = $7)",[
                 nameOfWaiter.Monday,
@@ -62,6 +64,8 @@ module.exports = function waiterApp(pool) {
             ]);
         } else {
         }
+        await pool.query("UPDATE daysWaiters SET color = 'btn-success' WHERE counter = 3");
+        await pool.query("UPDATE daysWaiters SET color = 'btn-danger' WHERE counter > 3");
     }
 
     async function getAllDaysAvailable() {
