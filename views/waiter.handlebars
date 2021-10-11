@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-12">
-    {{#each results}}
+        {{#each results}}
         <h1>Welcome {{names}}</h1>
         <form action="/waiters/{{username}}" method="POST">
-    {{/each}}
+            {{/each}}
             <input type="checkbox" name="Monday" id="Monday" value="Monday">Monday
             <input type="checkbox" name="Tuesday" id="Tuesday" value="Tuesday">Tuesday
             <input type="checkbox" name="Wednesday" id="Wednesday" value="Wednesday">Wednesday
@@ -18,22 +18,28 @@
     </div>
     <div class="col-12">
         {{#each workDays}}
-            {{monday}}
-            {{tuesday}} 
-            {{wednesday}} 
-            {{thursday}} 
-            {{friday}} 
-            {{saturday}} 
-            {{sunday}} 
+        <h3>I'm available to work on:</h3>
+        {{monday}}
+        {{tuesday}}
+        {{wednesday}}
+        {{thursday}}
+        {{friday}}
+        {{saturday}}
+        {{sunday}}
         {{/each}}
     </div>
 
-    <div class="col-12">
-{{#each results}}
+    <div class="col-6">
+        {{#each results}}
         {{!-- <h1>Welcome {{names}}</h1> --}}
         <form action="/reset/{{username}}" method="POST">
-    {{/each}}
+            {{/each}}
             <button type="submit"><em>Reset</em></button>
+        </form>
+    </div>
+    <div class="col-6">
+        <form action="/back" method="POST">
+            <button type="submit"><em>Back</em></button>
         </form>
     </div>
 </div>

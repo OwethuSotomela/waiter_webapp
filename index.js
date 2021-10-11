@@ -79,6 +79,10 @@ app.post('/reset/:username', async function(req, res){
     res.render('waiter')
 })
 
+app.post('/back', function(req, res){
+    res.render('waiter')
+})
+
 app.get('/days', function(req, res){
     res.render('/')
 })
