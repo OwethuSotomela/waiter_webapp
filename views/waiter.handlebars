@@ -18,28 +18,42 @@
     </div>
     <div class="col-12">
         {{#each workDays}}
-        <h3>I'm available to work on:</h3>
-        {{monday}}
-        {{tuesday}}
-        {{wednesday}}
-        {{thursday}}
-        {{friday}}
-        {{saturday}}
-        {{sunday}}
+        <h2>I'm available to work on:</h2>
+           <a href="{{monday}}"></a> 
+            {{tuesday}}
+            {{wednesday}}
+            {{thursday}}
+            {{friday}}
+            {{saturday}}
+            {{sunday}}
         {{/each}}
-    </div>
 
-    <div class="col-6">
+
+        {{#each workDays}}
+            <ul>
+                 <a href="/days">
+            <li>{{monday}}</li>
+                 </a>
+            </ul>
+        {{/each}}
+    
+    </div>
+    <div class="col-4">
         {{#each results}}
-        {{!-- <h1>Welcome {{names}}</h1> --}}
+        {{!-- <h1>{{names}} update date and continue</h1> --}}
         <form action="/reset/{{username}}" method="POST">
             {{/each}}
             <button type="submit"><em>Reset</em></button>
         </form>
     </div>
-    <div class="col-6">
-        <form action="/back" method="POST">
+    <div class="col-4">
+        <form action="/back/{{username}}" method="GET">
             <button type="submit"><em>Back</em></button>
+        </form>
+    </div>
+    <div class="col-4">
+        <form action="/home" method="GET">
+            <button type="submit"><em>Home</em></button>
         </form>
     </div>
 </div>
