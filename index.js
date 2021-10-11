@@ -74,6 +74,11 @@ app.post('/waiters/:username', async function(req, res, next){
     }
 })
 
+app.post('/reset/:username', async function(req, res){
+    await waiterCallBack.emptyDB()
+    res.render('waiter')
+})
+
 app.get('/days', function(req, res){
     res.render('/')
 })

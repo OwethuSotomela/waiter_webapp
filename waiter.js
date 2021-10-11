@@ -62,7 +62,10 @@ module.exports = function waiterApp(pool) {
             ]);
         } else {
         }
-    
+    }
+
+    async function emptyDB(){
+        await pool.query("DELETE FROM daysSelected")
     }
 
     return {
@@ -70,6 +73,7 @@ module.exports = function waiterApp(pool) {
         getWaiter,
         getSelected,
         getAllDaysSelected,
-        userDaysSelected
+        userDaysSelected,
+        emptyDB
     }
 }

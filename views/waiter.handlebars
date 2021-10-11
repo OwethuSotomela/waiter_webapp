@@ -27,4 +27,13 @@
             {{sunday}} 
         {{/each}}
     </div>
+
+    <div class="col-12">
+{{#each results}}
+        {{!-- <h1>Welcome {{names}}</h1> --}}
+        <form action="/reset/{{username}}" method="POST">
+    {{/each}}
+            <button type="submit"><em>Reset</em></button>
+        </form>
+    </div>
 </div>
