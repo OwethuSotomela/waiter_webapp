@@ -12,8 +12,10 @@
         {{/each}}
     </div>
     <div class="col-12">
-        <form action="/home" method="GET">
-            <button type="submit"><em>Home</em></button>
-        </form>
+           <a href="/home"><button type="submit"><em>Home</em></button></a>
+
+           <form action="/clear" method="post">
+               <button type="submit" class="btn btn-default btn btn-outline-dark"><em>Clear Schedule</em></button>
+           </form>
     </div>
 </div>
