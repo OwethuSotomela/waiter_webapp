@@ -64,16 +64,22 @@ module.exports = function waiterApp(pool) {
         }
     }
 
+    async function getAllDaysAvailable() {
+        var results = await pool.query("SELECT * FROM daysWaiters");
+        return results.rows;
+    }
+
     async function emptyDB(){
         await pool.query("DELETE FROM daysSelected")
     }
-
+    
     return {
         waiterFunction,
         getWaiter,
         getSelected,
         getAllDaysSelected,
         userDaysSelected,
-        emptyDB
+        emptyDB,
+        getAllDaysAvailable
     }
 }
