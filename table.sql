@@ -9,6 +9,7 @@ drop table if exists daysWaiters;
 create table daysWaiters (
 	id serial not null primary key,
     daysAvailable varchar(255) not null unique,
+    color varchar(255) not null,
     counter int not NULL
 );
 
@@ -25,13 +26,13 @@ create table daysSelected (
     Sunday varchar(255)  null
 );
 
-INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Monday', 0);
-INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Tuesday', 0);
-INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Wednesday', 0);
-INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Thursday', 0);
-INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Friday', 0);
-INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Saturday', 0);
-INSERT INTO daysWaiters (daysAvailable, counter) VALUES ('Sunday', 0);
+INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Monday', 'btn-warning', 0);
+INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Tuesday', 'btn-warning', 0);
+INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Wednesday', 'btn-warning', 0);
+INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Thursday', 'btn-warning', 0);
+INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Friday', 'btn-warning', 0);
+INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Saturday', 'btn-warning', 0);
+INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Sunday', 'btn-warning', 0);
 
 INSERT INTO waiters (username, names) VALUES ('OwSoto', 'Owethu Sotomela');
 INSERT INTO waiters (username, names) VALUES ('Wethu', 'Ohworthy SotoKnife');
