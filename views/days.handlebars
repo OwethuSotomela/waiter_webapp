@@ -1,21 +1,25 @@
-<div class="row">
-    <div class="col-12">
-        <h1><em>Waiter Weekly Schedule</em></h1>
-    </div>
-    <div class="col-12">
-        {{#each workDays}}
-            {{!-- {{daysavailable}} --}}
-        <form action="/daysavailable/{{daysavailable}}" method="POST">
-            <button type="submit" class="btn {{color}} btn-sm">{{daysavailable}} : They are {{counter}} Waiters</button>
-        </form>
-        <br>
-        {{/each}}
-    </div>
-    <div class="col-12">
-           <a href="/home"><button type="submit"><em>Home</em></button></a>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1><em>Waiter Weekly Schedule</em></h1>
+        </div>
+        <div class="col-12">
+            {{#each workDays}}
+            <form action="/daysavailable/{{daysavailable}}" method="POST">
+                <button type="submit" class="btn {{color}} btn-sm">{{daysavailable}} : There are {{counter}}
+                    Waiters</button>
+            </form>
+            <br>
+            {{/each}}
+        </div>
+        <div class="col-12">
+            <form action="/clear" method="post">
+                <button type="submit" class="btn btn-default btn btn-outline-dark"><em>Clear Schedule</em></button>
+            </form>
+        </div>
+        <div class="col-12">
+            <a href="/home"><button type="submit" class="btn btn-primary"><em>Home</em></button></a>
+        </div>
 
-           <form action="/clear" method="post">
-               <button type="submit" class="btn btn-default btn btn-outline-dark"><em>Clear Schedule</em></button>
-           </form>
     </div>
 </div>
