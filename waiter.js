@@ -81,6 +81,15 @@ module.exports = function waiterApp(pool) {
     async function emptyDB(){
         await pool.query("DELETE FROM daysSelected")
     }
+
+    async function clearDB(){
+        await pool.query("DELETE FROM dayswaiters")
+    }
+
+    async function insertColor(){
+        await pool.query("DELETE FROM daysSelected")
+        await pool.query("UPDATE daysWaiters SET color = 'btn-warning', counter=0 WHERE counter > 0")
+    }
     
     return {
         waiterFunction,
@@ -90,6 +99,8 @@ module.exports = function waiterApp(pool) {
         userDaysSelected,
         emptyDB,
         getAllDaysAvailable,
-        getAllWaitersByDay
+        getAllWaitersByDay,
+        clearDB,
+        insertColor
     }
 }
