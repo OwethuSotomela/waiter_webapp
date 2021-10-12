@@ -24,7 +24,7 @@
     <div class="row align-items-start">
         <div class="col-12">
             {{#each workDays}}
-            <h2>I'm available to work on:</h2>
+            <h2 class="btn btn-warning"><strong>I'm available to work on:</strong></h2>
             <ul style="list-style-type: none;">
                 <li>{{monday}}</li>
                 <li>{{tuesday}}</li>
@@ -41,12 +41,7 @@
 
 <div class="container">
     <div class="row align-items-start">
-        <div class="col-6">
-            <form action="/back/{{username}}" method="POST">
-                <button type="submit" class="btn btn-primary"><em>Back</em></button>
-            </form>
-        </div>
-        <div class="col-6">
+        <div class="col-12">
             <form action="/home" method="GET">
                 <button type="submit" class="btn btn-primary"><em>Home</em></button>
             </form>
