@@ -77,7 +77,7 @@ app.post('/reset/:username', async function(req, res){
     res.render('waiter')
 });
 
-app.get('/back/:username', function(req, res){
+app.post('/back/:username', function(req, res){
     res.redirect('/waiters/:username')
 });
 
@@ -98,10 +98,21 @@ app.get('/days/:dayOfTheWeek', async function(req, res){
     })
 })
 
+app.post('/clear', async function(req, res){
+    await waiterCallBack.insertColor()
+    res.render('days', {
+        workDays: await waiterCallBack.getAllDaysAvailable()
+    })
+});
+
 app.post('/daysavailable/:daysavailable', async function(req, res){
     res.render('daysavailable', {
         workDays: await waiterCallBack.getAllWaitersByDay(req.params.daysavailable)
     })
+})
+
+app.get('/back', function(req, res){
+    res.redirect('days')
 })
 
 const PORT = process.env.PORT || 1616;
