@@ -1,59 +1,55 @@
-<div class="row">
-    <div class="col-12">
-        {{#each results}}
-        <h1>Welcome {{names}}</h1>
-        <form action="/waiters/{{username}}" method="POST">
-            {{/each}}
-            <input type="checkbox" name="Monday" id="Monday" value="Monday">Monday
-            <input type="checkbox" name="Tuesday" id="Tuesday" value="Tuesday">Tuesday
-            <input type="checkbox" name="Wednesday" id="Wednesday" value="Wednesday">Wednesday
-            <input type="checkbox" name="Thursday" id="Thursday" value="Thursday">Thursday
-            <input type="checkbox" name="Friday" id="Friday" value="Friday">Friday
-            <input type="checkbox" name="Saturday" id="Saturday" value="Saturday">Saturday
-            <input type="checkbox" name="Sunday" id="Sunday" value="Sunday">Sunday
-            <br>
-            <br>
-            <button type="submit">Submit Days</button>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {{#each results}}
+            <h1>Welcome <strong><em>{{names}}</em></strong></h1>
+            <form action="/waiters/{{username}}" method="POST">
+                {{/each}}
+                <input type="checkbox" name="Monday" id="Monday" value="Monday">Monday
+                <input type="checkbox" name="Tuesday" id="Tuesday" value="Tuesday">Tuesday
+                <input type="checkbox" name="Wednesday" id="Wednesday" value="Wednesday">Wednesday
+                <input type="checkbox" name="Thursday" id="Thursday" value="Thursday">Thursday
+                <input type="checkbox" name="Friday" id="Friday" value="Friday">Friday
+                <input type="checkbox" name="Saturday" id="Saturday" value="Saturday">Saturday
+                <input type="checkbox" name="Sunday" id="Sunday" value="Sunday">Sunday
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit Days</button>
+            </form>
+        </div>
     </div>
-    <div class="col-12">
-        {{#each workDays}}
-        <h2>I'm available to work on:</h2>
-           <a href="{{monday}}"></a> 
-            {{tuesday}}
-            {{wednesday}}
-            {{thursday}}
-            {{friday}}
-            {{saturday}}
-            {{sunday}}
-        {{/each}}
+</div>
 
-
-        {{#each workDays}}
-            <ul>
-                 <a href="/days">
-            <li>{{monday}}</li>
-                 </a>
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col-12">
+            {{#each workDays}}
+            <h2>I'm available to work on:</h2>
+            <ul style="list-style-type: none;">
+                <li>{{monday}}</li>
+                <li>{{tuesday}}</li>
+                <li>{{wednesday}}</li>
+                <li>{{thursday}}</li>
+                <li>{{friday}}</li>
+                <li>{{saturday}}</li>
+                <li>{{sunday}}</li>
             </ul>
-        {{/each}}
-    
-    </div>
-    <div class="col-4">
-        {{#each results}}
-        {{!-- <h1>{{names}} update date and continue</h1> --}}
-        <form action="/reset/{{username}}" method="POST">
             {{/each}}
-            <button type="submit"><em>Reset</em></button>
-        </form>
+        </div>
     </div>
-    <div class="col-4">
-        <form action="/back/{{username}}" method="GET">
-            <button type="submit"><em>Back</em></button>
-        </form>
-    </div>
-    <div class="col-4">
-        <form action="/home" method="GET">
-            <button type="submit"><em>Home</em></button>
-        </form>
+</div>
+
+<div class="container">
+    <div class="row align-items-start">
+        <div class="col-6">
+            <form action="/back/{{username}}" method="POST">
+                <button type="submit" class="btn btn-primary"><em>Back</em></button>
+            </form>
+        </div>
+        <div class="col-6">
+            <form action="/home" method="GET">
+                <button type="submit" class="btn btn-primary"><em>Home</em></button>
+            </form>
+        </div>
     </div>
 </div>
