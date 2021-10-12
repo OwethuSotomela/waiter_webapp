@@ -9,27 +9,27 @@
 </head>
 
 <body>
-
-    <div class="row">
-        {{#if messages.alert}}
-        <div class="alert">{{messages.alert}}</div>
-        {{/if}}
-        <form action="/waiter" method="post">
-            <div class="col-12">
-                <input type="text" name="username" id="username">
-                <button type="submit">Waiter</button>
-            </div>
-        </form>
-        <br>
-        <br>
-        <form action="/days" method="get">
-            <div class="col-12">
-
-                <button type="submit">Owner</button>
-            </div>
-        </form>
+    <div class="container">
+        <h1>Waiter Webapp</h1>
+        <div class="row">
+            {{#if messages.alert}}
+            <div class="alert alert-danger" role="alert" style="font-size: 2vh;"><strong>{{messages.alert}}</strong></div>
+            {{/if}}
+            <form action="/waiter" method="post">
+                <div class="col-12">
+                    <input type="text" name="username" id="username">
+                    <button type="submit" class="btn btn-primary">Waiter</button>
+                </div>
+            </form>
+            <br>
+            <br>
+            <form action="/days" method="get">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Owner</button>
+                </div>
+            </form>
+        </div>
     </div>
-
 </body>
 
 </html>
