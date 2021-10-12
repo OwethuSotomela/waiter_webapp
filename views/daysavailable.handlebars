@@ -1,3 +1,26 @@
-{{#each workDays}}
-    <h2>{{username}}</h2>
-{{/each}}
+<div class="container">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-12">
+                {{#each workDays}}
+                <h2>{{username}}</h2>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-6">
+                <form action="/back" method="GET">
+                    <button type="submit" class="btn btn-primary"><em>Back</em></button>
+                </form>
+            </div>
+            <div class="col-6">
+                <form action="/home" method="GET">
+                    <button type="submit" class="btn btn-primary"><em>Home</em></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
