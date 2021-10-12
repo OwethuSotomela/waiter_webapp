@@ -1,11 +1,5 @@
-/* .row{
-    margin: auto;
-    border-top: 1px solid black;
-    height: 100vh;
-} */
-
 body {
-	background-color: #8CBD89;
+	background-color: #FF007F;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -13,12 +7,14 @@ body {
 	margin: auto;
 	background-color: honeydew;
 	width: 80%;
+	height: 80%;
 	padding: 1em;
 }
 h1{
 	text-align: center;
 	margin-top: 1em;
 	margin-bottom: 1em;
+	color: #FF007F;
 }
 .row{
 	text-align: center;
