@@ -43,8 +43,8 @@ app.post('/waiter', async function(req, res, next){
         var result = await waiterCallBack.waiterFunction(waiter);
         var waiterLength = await waiterCallBack.getWaiter(waiter);
         if(waiter == "" || waiterLength == 0){
-            req.flash('alert', 'Only authorised personnel')
-            res.redirect('/')
+            req.flash('alert', 'Sign-up as a new waiter to get a username')
+            res.redirect('/signup')
         }
         res.render('waiter', {
             results: result,
@@ -81,6 +81,10 @@ app.post('/back/:username', function(req, res){
     res.redirect('/waiters/:username')
 });
 
+app.get('/signup', function(req, res){
+    res.render('signup')
+})
+
 app.get('/home', function(req, res){
     res.redirect('/')
 });
@@ -113,6 +117,15 @@ app.post('/daysavailable/:daysavailable', async function(req, res){
 
 app.get('/back', function(req, res){
     res.redirect('days')
+})
+
+app.post('/register', async function(req, res){
+    var newWaiter = req.body.newuser;
+    var newName = req.body.fullname;
+    console.log(newWaiter)
+    console.log(newName)
+    await waiterCallBack.insertNewUser(newWaiter, newName)
+    res.render('signup')
 })
 
 const PORT = process.env.PORT || 1616;
