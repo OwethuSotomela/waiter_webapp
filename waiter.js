@@ -27,7 +27,6 @@ module.exports = function waiterApp(pool) {
     }
 
     async function getSelected(nameOfWaiter) {
-
         var daysWaiters = await pool.query("SELECT * FROM daysWaiters WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4 OR daysAvailable = $5  OR daysAvailable =$6  OR daysAvailable =$7)", [
             nameOfWaiter.Monday,
             nameOfWaiter.Tuesday,
@@ -85,16 +84,15 @@ module.exports = function waiterApp(pool) {
         await pool.query("DELETE FROM dayswaiters")
     }
 
-    async function insertColor() {
+    async function addColor() {
         await pool.query("DELETE FROM daysSelected")
         await pool.query("UPDATE daysWaiters SET color = 'btn-warning', counter=0 WHERE counter > 0")
     }
 
     async function insertNewUser(newWaiter, waiterName) {
-        var newUserName = await pool.query("SELECT * FROM waiters WHERE newWaiter = $1", [newWaiter])
-        if (newUserName.rows.length == 0 && waiterName == "") {
+        var newUserName = await pool.query("SELECT * FROM waiters WHERE username = $1", [newWaiter])
             await pool.query(`insert into waiters (username, names) values ($1, $2)`, [newWaiter, waiterName]);
-        }
+            return newUserName.rows;
     }
 
     return {
@@ -107,7 +105,7 @@ module.exports = function waiterApp(pool) {
         getAllDaysAvailable,
         getAllWaitersByDay,
         clearDB,
-        insertColor,
+        addColor,
         insertNewUser
     }
 }

@@ -1,13 +1,18 @@
 <div class="container">
     <div class="row align-items-start">
-        <h1>New-User Signup</h1>
+        <h1>New-Waiter Signup</h1>
         <div class="col-12">
+             {{#if messages.alert}}
+            <div class="alert alert-danger" role="alert" style="font-size: 2vh;"><strong>{{messages.alert}}</strong></div>
+            {{/if}}
             <div class="lay">
                 <span><strong>Enter your name and username to access the weekdays</strong></span>
+                <br>
+                <br>
                 <form action="/register" method="POST">
-                    <label>Username</label>
+                    <label><strong>Username</strong></label>
                     <input type="text" placeholder="" name="newuser">
-                    <label>Full Name</label>
+                    <label><strong>Full Name</strong></label>
                     <input type="text" placeholder="" name="fullname">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
