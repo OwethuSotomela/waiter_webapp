@@ -27,7 +27,7 @@ module.exports = function waiterApp(pool) {
     }
 
     async function getSelected(nameOfWaiter) {
-        var daysWaiters = await pool.query("SELECT * FROM daysWaiters WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4 OR daysAvailable = $5  OR daysAvailable =$6  OR daysAvailable =$7)", [
+        var daysWaiters = await pool.query("SELECT * FROM daysWaiters WHERE (daysAvailable = $1 OR daysAvailable = $2  OR daysAvailable = $3  OR daysAvailable = $4 OR daysAvailable = $5  OR daysAvailable = $6  OR daysAvailable = $7)", [
             nameOfWaiter.Monday,
             nameOfWaiter.Tuesday,
             nameOfWaiter.Wednesday,
@@ -61,6 +61,16 @@ module.exports = function waiterApp(pool) {
                 nameOfWaiter.Sunday,
             ]);
         } else {
+            await pool.query("UPDATE daysSelected SET Monday = $1,Tuesday = $2, Wednesday = $3, Thursday = $4, Friday = $5, Saturday = $6,Sunday = $7 WHERE (username = $8)", [
+                nameOfWaiter.Monday,
+                nameOfWaiter.Tuesday,
+                nameOfWaiter.Wednesday,
+                nameOfWaiter.Thursday,
+                nameOfWaiter.Friday,
+                nameOfWaiter.Saturday,
+                nameOfWaiter.Sunday,
+                nameOfWaiter.username
+            ]);
         }
         await pool.query("UPDATE daysWaiters SET color = 'btn-success' WHERE counter = 3");
         await pool.query("UPDATE daysWaiters SET color = 'btn-danger' WHERE counter > 3");
@@ -91,8 +101,8 @@ module.exports = function waiterApp(pool) {
 
     async function insertNewUser(newWaiter, waiterName) {
         var newUserName = await pool.query("SELECT * FROM waiters WHERE username = $1", [newWaiter])
-            await pool.query(`insert into waiters (username, names) values ($1, $2)`, [newWaiter, waiterName]);
-            return newUserName.rows;
+        await pool.query(`insert into waiters (username, names) values ($1, $2)`, [newWaiter, waiterName]);
+        return newUserName.rows;
     }
 
     return {
@@ -106,6 +116,6 @@ module.exports = function waiterApp(pool) {
         getAllWaitersByDay,
         clearDB,
         addColor,
-        insertNewUser
+        insertNewUser,
     }
 }

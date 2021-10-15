@@ -2,7 +2,6 @@ body {
 	background-color: #FF007F;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
 .container {
 	margin: auto;
 	background-color: honeydew;
@@ -19,7 +18,6 @@ h1{
 .row{
 	text-align: center;
 	display: flex;
-
 }
 
 .counter {
