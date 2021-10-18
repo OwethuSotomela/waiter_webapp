@@ -15,6 +15,7 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
 }))
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(flash());
@@ -94,13 +95,13 @@ app.get('/days', async function (req, res) {
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
     })
-})
+});
 
 app.get('/days/:dayOfTheWeek', async function (req, res) {
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
     })
-})
+});
 
 app.post('/clear', async function (req, res) {
     await waiterCallBack.addColor()
@@ -113,11 +114,11 @@ app.post('/daysavailable/:daysavailable', async function (req, res) {
     res.render('daysavailable', {
         workDays: await waiterCallBack.getAllWaitersByDay(req.params.daysavailable)
     })
-})
+});
 
 app.get('/back', function (req, res) {
     res.redirect('days')
-})
+});
 
 app.post('/register', async function (req, res, next) {
     try {
@@ -138,4 +139,4 @@ app.post('/register', async function (req, res, next) {
 const PORT = process.env.PORT || 1616;
 app.listen(PORT, function () {
     console.log("App started at port:", PORT)
-})
+});

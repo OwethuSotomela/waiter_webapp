@@ -60,7 +60,8 @@ module.exports = function waiterApp(pool) {
                 nameOfWaiter.Saturday,
                 nameOfWaiter.Sunday,
             ]);
-        } else {
+        }
+         else {
             await pool.query("UPDATE daysSelected SET Monday = $1,Tuesday = $2, Wednesday = $3, Thursday = $4, Friday = $5, Saturday = $6,Sunday = $7 WHERE (username = $8)", [
                 nameOfWaiter.Monday,
                 nameOfWaiter.Tuesday,
@@ -72,6 +73,7 @@ module.exports = function waiterApp(pool) {
                 nameOfWaiter.username
             ]);
         }
+
         await pool.query("UPDATE daysWaiters SET color = 'btn-success' WHERE counter = 3");
         await pool.query("UPDATE daysWaiters SET color = 'btn-danger' WHERE counter > 3");
     }
