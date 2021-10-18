@@ -49,6 +49,7 @@ app.post('/waiter', async function (req, res, next) {
         }
         res.render('waiter', {
             results: result,
+            workDays: await waiterCallBack.userDaysSelected(waiter)
         });
     } catch (error) {
         next(error);
@@ -73,10 +74,10 @@ app.post('/waiters/:username', async function (req, res, next) {
     }
 });
 
-app.post('/reset/:username', async function (req, res) {
-    await waiterCallBack.emptyDB()
-    res.render('waiter')
-});
+// app.post('/reset/:username', async function (req, res) {
+//     await waiterCallBack.emptyDB()
+//     res.render('waiter')
+// });
 
 app.post('/back/:username', function (req, res) {
     res.redirect('/waiters/:username')
@@ -98,12 +99,14 @@ app.get('/days', async function (req, res) {
 });
 
 app.get('/days/:dayOfTheWeek', async function (req, res) {
+    console.log(await waiterCallBack.getAllDaysAvailable())
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
     })
 });
 
 app.post('/clear', async function (req, res) {
+    console.log(await waiterCallBack.getAllDaysAvailable())
     await waiterCallBack.addColor()
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
@@ -111,6 +114,7 @@ app.post('/clear', async function (req, res) {
 });
 
 app.post('/daysavailable/:daysavailable', async function (req, res) {
+    console.log(await waiterCallBack.getAllWaitersByDay(req.params.daysavailable))
     res.render('daysavailable', {
         workDays: await waiterCallBack.getAllWaitersByDay(req.params.daysavailable)
     })
