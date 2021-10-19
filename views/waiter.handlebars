@@ -23,16 +23,10 @@
 <div class="container">
     <div class="row align-items-start">
         <div class="col-12">
-            {{#each workDays}}
             <h2 class="btn btn-warning"><strong>I'm available to work on:</strong></h2>
+            {{#each workDays}}
             <ul style="list-style-type: none;">
-                <li>{{monday}}</li>
-                <li>{{tuesday}}</li>
-                <li>{{wednesday}}</li>
-                <li>{{thursday}}</li>
-                <li>{{friday}}</li>
-                <li>{{saturday}}</li>
-                <li>{{sunday}}</li>
+                <li>{{daychecked}}</li>
             </ul>
             {{/each}}
         </div>

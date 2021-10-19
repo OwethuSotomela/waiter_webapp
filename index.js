@@ -58,26 +58,21 @@ app.post('/waiter', async function (req, res, next) {
 
 app.post('/waiters/:username', async function (req, res, next) {
     try {
-        var Days = { username: req.params.username, Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday }
-        await waiterCallBack.getSelected(Days)
+        var Days = {Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday }
+        await waiterCallBack.getSelected(Days, req.params.username)
         var workDays = await waiterCallBack.userDaysSelected(req.params.username)
         var results = await waiterCallBack.waiterFunction(req.params.username)
         // console.log(results)
-        console.log(workDays)
+        // console.log(workDays)
         // console.log(Days)
         res.render('waiter', {
-            results: await waiterCallBack.waiterFunction(req.params.username),
-            workDays: await waiterCallBack.userDaysSelected(req.params.username)
+            results,
+            workDays
         })
     } catch (error) {
         next(error);
     }
 });
-
-// app.post('/reset/:username', async function (req, res) {
-//     await waiterCallBack.emptyDB()
-//     res.render('waiter')
-// });
 
 app.post('/back/:username', function (req, res) {
     res.redirect('/waiters/:username')
@@ -128,8 +123,6 @@ app.post('/register', async function (req, res, next) {
     try {
         var newWaiter = req.body.newuser;
         var newName = req.body.fullname;
-        // console.log(newWaiter)
-        // console.log(newName)
         if (newWaiter !== '' && newName !== '') {
             await waiterCallBack.insertNewUser(newWaiter, newName)
             req.flash('alert', 'You are successfully added to the system of waiters')

@@ -16,14 +16,9 @@ create table daysWaiters (
 drop table if exists daysSelected;
 create table daysSelected (
 	id serial not null primary key,
-	username varchar(255) not null unique,
-    Monday varchar(255)  null,
-    Tuesday varchar(255)  null,
-    Wednesday varchar(255)  null,
-    Thursday varchar(255)  null,
-    Friday varchar(255)  null,
-    Saturday varchar(255)  null,
-    Sunday varchar(255)  null
+	username varchar(255) not null,
+    dayChecked varchar(255)  not null,
+    dayCheckedUsername varchar(255) not null unique
 );
 
 INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Monday', 'btn-warning', 0);
