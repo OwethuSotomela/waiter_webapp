@@ -88,9 +88,9 @@ module.exports = function waiterApp(pool) {
         return results.rows;
     }
 
-    async function emptyDB() {
-        await pool.query("DELETE FROM daysSelected")
-    }
+    // async function emptyDB() {
+    //     await pool.query("DELETE FROM daysSelected")
+    // }
 
     async function clearDB() {
         await pool.query("DELETE FROM dayswaiters")
@@ -113,7 +113,7 @@ module.exports = function waiterApp(pool) {
         getSelected,
         getAllDaysSelected,
         userDaysSelected,
-        emptyDB,
+        // emptyDB,
         getAllDaysAvailable,
         getAllWaitersByDay,
         clearDB,

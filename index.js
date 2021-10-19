@@ -62,9 +62,9 @@ app.post('/waiters/:username', async function (req, res, next) {
         await waiterCallBack.getSelected(Days)
         var workDays = await waiterCallBack.userDaysSelected(req.params.username)
         var results = await waiterCallBack.waiterFunction(req.params.username)
-        console.log(results)
+        // console.log(results)
         console.log(workDays)
-        console.log(Days)
+        // console.log(Days)
         res.render('waiter', {
             results: await waiterCallBack.waiterFunction(req.params.username),
             workDays: await waiterCallBack.userDaysSelected(req.params.username)
@@ -92,21 +92,21 @@ app.get('/home', function (req, res) {
 });
 
 app.get('/days', async function (req, res) {
-    console.log(await waiterCallBack.getAllDaysAvailable())
+    // console.log(await waiterCallBack.getAllDaysAvailable())
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
     })
 });
 
 app.get('/days/:dayOfTheWeek', async function (req, res) {
-    console.log(await waiterCallBack.getAllDaysAvailable())
+    // console.log(await waiterCallBack.getAllDaysAvailable())
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
     })
 });
 
 app.post('/clear', async function (req, res) {
-    console.log(await waiterCallBack.getAllDaysAvailable())
+    // console.log(await waiterCallBack.getAllDaysAvailable())
     await waiterCallBack.addColor()
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
@@ -114,7 +114,7 @@ app.post('/clear', async function (req, res) {
 });
 
 app.post('/daysavailable/:daysavailable', async function (req, res) {
-    console.log(await waiterCallBack.getAllWaitersByDay(req.params.daysavailable))
+    // console.log(await waiterCallBack.getAllWaitersByDay(req.params.daysavailable))
     res.render('daysavailable', {
         workDays: await waiterCallBack.getAllWaitersByDay(req.params.daysavailable)
     })
@@ -128,8 +128,8 @@ app.post('/register', async function (req, res, next) {
     try {
         var newWaiter = req.body.newuser;
         var newName = req.body.fullname;
-        console.log(newWaiter)
-        console.log(newName)
+        // console.log(newWaiter)
+        // console.log(newName)
         if (newWaiter !== '' && newName !== '') {
             await waiterCallBack.insertNewUser(newWaiter, newName)
             req.flash('alert', 'You are successfully added to the system of waiters')
