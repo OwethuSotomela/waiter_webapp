@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
     res.render('index');
 })
 
-app.post('/waiter', async function (req, res, next) {
+app.post('/login', async function (req, res, next) {
     try {
         var waiter = req.body.username;
         var result = await waiterCallBack.waiterFunction(waiter);
@@ -46,6 +46,11 @@ app.post('/waiter', async function (req, res, next) {
         if (waiter == "" || waiterLength == 0) {
             req.flash('alert', 'Sign-up as a new waiter to get a username')
             res.redirect('/signup')
+        }
+        if (waiter === "Sokie@admin") {
+            res.render('days', {
+                workDays: await waiterCallBack.getAllDaysAvailable()
+            })
         }
         res.render('waiter', {
             results: result,
@@ -58,13 +63,10 @@ app.post('/waiter', async function (req, res, next) {
 
 app.post('/waiters/:username', async function (req, res, next) {
     try {
-        var Days = {Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday }
+        var Days = { Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday }
         await waiterCallBack.getSelected(Days, req.params.username)
         var workDays = await waiterCallBack.userDaysSelected(req.params.username)
         var results = await waiterCallBack.waiterFunction(req.params.username)
-        // console.log(results)
-        // console.log(workDays)
-        // console.log(Days)
         res.render('waiter', {
             results,
             workDays
@@ -87,21 +89,23 @@ app.get('/home', function (req, res) {
 });
 
 app.get('/days', async function (req, res) {
-    // console.log(await waiterCallBack.getAllDaysAvailable())
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
     })
 });
 
+app.post('/days', function (req, res) {
+    res.render('days', {
+    })
+})
+
 app.get('/days/:dayOfTheWeek', async function (req, res) {
-    // console.log(await waiterCallBack.getAllDaysAvailable())
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
     })
 });
 
 app.post('/clear', async function (req, res) {
-    // console.log(await waiterCallBack.getAllDaysAvailable())
     await waiterCallBack.addColor()
     res.render('days', {
         workDays: await waiterCallBack.getAllDaysAvailable()
@@ -109,7 +113,6 @@ app.post('/clear', async function (req, res) {
 });
 
 app.post('/daysavailable/:daysavailable', async function (req, res) {
-    // console.log(await waiterCallBack.getAllWaitersByDay(req.params.daysavailable))
     res.render('daysavailable', {
         workDays: await waiterCallBack.getAllWaitersByDay(req.params.daysavailable)
     })
@@ -137,3 +140,4 @@ const PORT = process.env.PORT || 1616;
 app.listen(PORT, function () {
     console.log("App started at port:", PORT)
 });
+

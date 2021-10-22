@@ -1,5 +1,5 @@
-drop table if exists waiters;
-create table waiters(
+drop table if exists employerAndEmployees;
+create table employerAndEmployees(
 	id serial not null primary key,
 	username varchar(255) not null unique,
 	names varchar(255) not null
@@ -29,8 +29,9 @@ INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Friday', 'btn-w
 INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Saturday', 'btn-warning', 0);
 INSERT INTO daysWaiters (daysAvailable, color, counter) VALUES ('Sunday', 'btn-warning', 0);
 
-INSERT INTO waiters (username, names) VALUES ('OwSoto', 'Owethu Sotomela');
-INSERT INTO waiters (username, names) VALUES ('Wethu', 'Ohworthy SotoKnife');
-INSERT INTO waiters (username, names) VALUES ('Zena123', 'Zena Tyiso');
-INSERT INTO waiters (username, names) VALUES ('Makho123', 'Makhosandile Makho');
-INSERT INTO waiters (username, names) VALUES ('Pholisa123', 'Pholisa Fatyela');
+INSERT INTO employerAndEmployees (username, names) VALUES ('OwSoto', 'Owethu Sotomela');
+INSERT INTO employerAndEmployees (username, names) VALUES ('Wethu', 'Ohworthy SotoKnife');
+INSERT INTO employerAndEmployees (username, names) VALUES ('Zena123', 'Zena Tyiso');
+INSERT INTO employerAndEmployees (username, names) VALUES ('Makho123', 'Makhosandile Makho');
+INSERT INTO employerAndEmployees (username, names) VALUES ('Pholisa123', 'Pholisa Fatyela');
+INSERT INTO employerAndEmployees (username, names) VALUES ('Sokie@admin', 'Sokie Sotomela');

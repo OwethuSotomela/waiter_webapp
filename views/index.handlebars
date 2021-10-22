@@ -13,21 +13,17 @@
         <h1>Waiter Webapp</h1>
         <div class="row">
             {{#if messages.alert}}
-            <div class="alert alert-danger" role="alert" style="font-size: 2vh;"><strong>{{messages.alert}}</strong></div>
+            <div class="alert alert-danger" role="alert" style="font-size: 2vh;"><strong>{{messages.alert}}</strong>
+            </div>
             {{/if}}
-            <form action="/waiter" method="post">
+            <form action="/login" method="post">
                 <div class="col-12">
                     <input type="text" name="username" id="username">
-                    <button type="submit" class="btn btn-primary">Waiter</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </div>
             </form>
             <br>
             <br>
-            <form action="/days" method="get">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Owner</button>
-                </div>
-            </form>
         </div>
     </div>
 </body>
