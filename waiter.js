@@ -6,6 +6,7 @@ module.exports = function waiterApp(pool) {
         var alreadyExist = await pool.query("SELECT * FROM employerAndEmployees WHERE username = $1", [loggedIn]);
         if (alreadyExist.rows.length == 0) {
             message = "Username not found";
+            return 0
         } else {
             return alreadyExist.rows;
         }

@@ -16,6 +16,10 @@
             <div class="alert alert-danger" role="alert" style="font-size: 2vh;"><strong>{{messages.alert}}</strong>
             </div>
             {{/if}}
+            {{#if messages.success}}
+            <div class="alert alert-success" role="alert" style="font-size: 2vh;"><strong>{{messages.success}}</strong></div>
+            {{/if}}
+            <br>
             <form action="/login" method="post">
                 <div class="col-12">
                     <input type="text" name="username" id="username">

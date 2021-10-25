@@ -43,11 +43,12 @@ app.post('/login', async function (req, res, next) {
         var loggedIn = req.body.username;
         var result = await waiterCallBack.waiterFunction(loggedIn);
         var loggedInLength = await waiterCallBack.getWaiter(loggedIn);
-        if (loggedIn == "" || loggedInLength == 0) {
+        if (loggedIn == "" || result == 0 || loggedInLength == 0) {
             req.flash('alert', 'Sign-up as a new waiter to get a username')
             res.redirect('/signup')
         }
         if (loggedIn === "Sokie@admin") {
+            console.log(await waiterCallBack.getAllDaysAvailable())
             res.render('days', {
                 workDays: await waiterCallBack.getAllDaysAvailable()
             })
@@ -128,7 +129,7 @@ app.post('/register', async function (req, res, next) {
         var newName = req.body.fullname;
         if (newWaiter !== '' && newName !== '') {
             await waiterCallBack.insertNewUser(newWaiter, newName)
-            req.flash('alert', 'You are successfully added to the system of waiters')
+            req.flash('success', 'You are successfully added to the system of waiters')
             res.redirect('/')
         }
     } catch (error) {
