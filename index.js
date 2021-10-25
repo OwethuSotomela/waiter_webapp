@@ -40,21 +40,21 @@ app.get('/', function (req, res) {
 
 app.post('/login', async function (req, res, next) {
     try {
-        var waiter = req.body.username;
-        var result = await waiterCallBack.waiterFunction(waiter);
-        var waiterLength = await waiterCallBack.getWaiter(waiter);
-        if (waiter == "" || waiterLength == 0) {
+        var loggedIn = req.body.username;
+        var result = await waiterCallBack.waiterFunction(loggedIn);
+        var loggedInLength = await waiterCallBack.getWaiter(loggedIn);
+        if (loggedIn == "" || loggedInLength == 0) {
             req.flash('alert', 'Sign-up as a new waiter to get a username')
             res.redirect('/signup')
         }
-        if (waiter === "Sokie@admin") {
+        if (loggedIn === "Sokie@admin") {
             res.render('days', {
                 workDays: await waiterCallBack.getAllDaysAvailable()
             })
         }
         res.render('waiter', {
             results: result,
-            workDays: await waiterCallBack.userDaysSelected(waiter)
+            workDays: await waiterCallBack.userDaysSelected(loggedIn)
         });
     } catch (error) {
         next(error);
