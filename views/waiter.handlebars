@@ -5,13 +5,10 @@
             <h1>Welcome <strong><em>{{names}}</em></strong></h1>
             <form action="/waiters/{{username}}" method="POST">
                 {{/each}}
-                <input type="checkbox" name="Monday" id="Monday" value="Monday">Monday
-                <input type="checkbox" name="Tuesday" id="Tuesday" value="Tuesday">Tuesday
-                <input type="checkbox" name="Wednesday" id="Wednesday" value="Wednesday">Wednesday
-                <input type="checkbox" name="Thursday" id="Thursday" value="Thursday">Thursday
-                <input type="checkbox" name="Friday" id="Friday" value="Friday">Friday
-                <input type="checkbox" name="Saturday" id="Saturday" value="Saturday">Saturday
-                <input type="checkbox" name="Sunday" id="Sunday" value="Sunday">Sunday
+
+                {{#each Aweek}}
+                <input type="checkbox" name="{{day}}" id="{{day}}" value="{{day}}" {{checked}}>{{day}}
+                {{/each}}
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit Days</button>

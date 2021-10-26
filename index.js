@@ -48,14 +48,16 @@ app.post('/login', async function (req, res, next) {
             res.redirect('/signup')
         }
         if (loggedIn === "Sokie@admin") {
-            console.log(await waiterCallBack.getAllDaysAvailable())
+            // console.log(await waiterCallBack.getAllDaysAvailable())
             res.render('days', {
                 workDays: await waiterCallBack.getAllDaysAvailable()
             })
         }
         res.render('waiter', {
             results: result,
-            workDays: await waiterCallBack.userDaysSelected(loggedIn)
+            workDays: await waiterCallBack.userDaysSelected(loggedIn),
+            Aweek: await waiterCallBack.DaysToPiickAt(loggedIn)
+
         });
     } catch (error) {
         next(error);
@@ -65,12 +67,17 @@ app.post('/login', async function (req, res, next) {
 app.post('/waiters/:username', async function (req, res, next) {
     try {
         var Days = { Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday }
+        
+        console.log(Days)
+
         await waiterCallBack.getSelected(Days, req.params.username)
         var workDays = await waiterCallBack.userDaysSelected(req.params.username)
         var results = await waiterCallBack.waiterFunction(req.params.username)
+
         res.render('waiter', {
             results,
-            workDays
+            workDays,
+            Aweek: await waiterCallBack.DaysToPiickAt(req.params.username)
         })
     } catch (error) {
         next(error);

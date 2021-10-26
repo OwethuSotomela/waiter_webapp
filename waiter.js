@@ -29,18 +29,36 @@ module.exports = function waiterApp(pool) {
         return results.rows;
     }
 
+    async function DaysToPiickAt(username){
+        var results = await pool.query("SELECT * FROM daysSelected WHERE username = $1", [username]);
+        var days = [{checked:"", day: "Monday"},{checked:"", day: "Tuesday"},{checked:"", day: "Wednesday"},{checked:"", day: "Thursday"},{checked:"", day: "Friday"},{checked:"", day: "Saturday"},{checked:"", day: "Sunday"}]
+        if(results.rows.length !== 0){
+            var resultsLoop = results.rows
+            for (let index = 0; index < days.length; index++) {
+                const day = days[index].day;
+                resultsLoop.forEach(element => {
+                    if(element.daychecked == day){
+                        days[index].checked = "checked";
+                    }
+                });
+            }    
+        } return days
+    }
+
     async function getSelected(daysChecked, username) {
 
         for (const day in daysChecked) {
-            if (daysChecked[day] != null) {
-                var results = await pool.query("SELECT * FROM daysSelected WHERE dayCheckedUsername = $1", [daysChecked[day] + username]);
+            var results = await pool.query("SELECT * FROM daysSelected WHERE dayCheckedUsername = $1", [daysChecked[day] + username]);
+            var results2 = await pool.query("SELECT * FROM daysSelected WHERE dayCheckedUsername = $1", [day+ username]);
+            if (daysChecked[day] != undefined) {
                 if (results.rows.length == 0) {
                     await pool.query("insert into daysSelected (username, dayChecked, dayCheckedUsername) values ($1, $2, $3)", [username, daysChecked[day], daysChecked[day] + username]);
                     await addCounter(daysChecked[day]);
                 } else {
-                    await pool.query("DELETE FROM daysSelected WHERE (dayCheckedUsername=$1)", [daysChecked[day] + username]);
-                    await subractCounter(daysChecked[day]);
                 }
+            } else {
+                    await pool.query("DELETE FROM daysSelected WHERE (dayCheckedUsername=$1)", [day + username]);
+                    await subractCounter(day);
             }
         }
         await pool.query("UPDATE daysWaiters SET color = 'btn-success' WHERE counter = 3");
@@ -52,7 +70,7 @@ module.exports = function waiterApp(pool) {
     }
 
     async function subractCounter(day) {
-        await pool.query("UPDATE daysWaiters SET counter = counter - 1 WHERE (daysAvailable=$1)", [day]);
+        await pool.query("UPDATE daysWaiters SET counter = counter - 1 WHERE (daysAvailable=$1 AND NOT counter=0)", [day]);
     }
 
     async function getAllDaysAvailable() {
@@ -91,5 +109,6 @@ module.exports = function waiterApp(pool) {
         clearDB,
         addColor,
         insertNewUser,
+        DaysToPiickAt
     }
 }
