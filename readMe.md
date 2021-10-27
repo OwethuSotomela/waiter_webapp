@@ -1,0 +1,1 @@
+[![Build Status](https://app.travis-ci.com/OwethuSotomela/waiter_webapp.svg?branch=master)](https://app.travis-ci.com/OwethuSotomela/waiter_webapp)
