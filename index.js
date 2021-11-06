@@ -48,7 +48,6 @@ app.post('/login', async function (req, res, next) {
             res.redirect('/signup')
         }
         if (loggedIn === "Sokie@admin") {
-            // console.log(await waiterCallBack.getAllDaysAvailable())
             res.render('days', {
                 workDays: await waiterCallBack.getAllDaysAvailable()
             })
@@ -57,7 +56,6 @@ app.post('/login', async function (req, res, next) {
             results: result,
             workDays: await waiterCallBack.userDaysSelected(loggedIn),
             Aweek: await waiterCallBack.DaysToPiickAt(loggedIn)
-
         });
     } catch (error) {
         next(error);

@@ -21,11 +21,13 @@ module.exports = function waiterApp(pool) {
 
     async function getAllDaysSelected() {
         var results = await pool.query("SELECT * FROM daysSelected");
+        // console.log(results.rows)
         return results.rows;
     }
 
     async function userDaysSelected(username) {
         var results = await pool.query("SELECT * FROM daysSelected WHERE username = $1", [username]);
+        // console.log(results.rows);
         return results.rows;
     }
 
@@ -42,6 +44,7 @@ module.exports = function waiterApp(pool) {
                     }
                 });
             }    
+        // console.log(days)
         } return days
     }
 
@@ -75,6 +78,7 @@ module.exports = function waiterApp(pool) {
 
     async function getAllDaysAvailable() {
         var results = await pool.query("SELECT * FROM daysWaiters");
+        // console.log(results);
         return results.rows;
     }
 
@@ -112,3 +116,20 @@ module.exports = function waiterApp(pool) {
         DaysToPiickAt
     }
 }
+
+
+
+// it("Should insert Banana basket to the database", async function () {
+
+//     var allBaskets = ["Banana", "Apple", "Orange"]
+//     var fruitBasket = [];
+
+//     await basket.createFruitBasket("Banana", 1, 3)
+//     var getFruitName = await basket.getFruit("")
+
+//     getFruitName.forEach(element => {
+//         fruitBasket.push(element.fruit_name)
+//     });
+
+//     assert.equal(allBaskets.length, fruitBasket.length)
+// })
