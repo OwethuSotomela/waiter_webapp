@@ -2,7 +2,7 @@ const assert = require("assert");
 const Waiter_App = require("../waiter");
 const { Pool } = require("pg");
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/waiter';
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/travis_ci_test';
 
 const pool = new Pool({
     connectionString: connectionString,
