@@ -27,7 +27,6 @@ module.exports = function waiterApp(pool) {
 
     async function userDaysSelected(username) {
         var results = await pool.query("SELECT * FROM daysSelected WHERE username = $1", [username]);
-        // console.log(results.rows);
         return results.rows;
     }
 
@@ -119,17 +118,3 @@ module.exports = function waiterApp(pool) {
 
 
 
-// it("Should insert Banana basket to the database", async function () {
-
-//     var allBaskets = ["Banana", "Apple", "Orange"]
-//     var fruitBasket = [];
-
-//     await basket.createFruitBasket("Banana", 1, 3)
-//     var getFruitName = await basket.getFruit("")
-
-//     getFruitName.forEach(element => {
-//         fruitBasket.push(element.fruit_name)
-//     });
-
-//     assert.equal(allBaskets.length, fruitBasket.length)
-// })
