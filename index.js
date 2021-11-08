@@ -6,6 +6,7 @@ const session = require('express-session');
 const { redirect } = require('statuses');
 const { Pool } = require("pg");
 const waiter = require("./waiter");
+const routes = require('./routesFile');
 
 const app = express();
 
@@ -33,114 +34,33 @@ const pool = new Pool({
 });
 
 var waiterCallBack = waiter(pool);
+const waiterRoutes = routes(waiterCallBack);
 
-app.get('/', function (req, res) {
-    res.render('index');
-})
+app.get('/', waiterRoutes.home)
 
-app.post('/login', async function (req, res, next) {
-    try {
-        var loggedIn = req.body.username;
-        var result = await waiterCallBack.waiterFunction(loggedIn);
-        var loggedInLength = await waiterCallBack.getWaiter(loggedIn);
-        if (loggedIn == "" || result == 0 || loggedInLength == 0) {
-            req.flash('alert', 'Sign-up as a new waiter to get a username')
-            res.redirect('/signup')
-        }
-        if (loggedIn === "Sokie@admin") {
-            res.render('days', {
-                workDays: await waiterCallBack.getAllDaysAvailable()
-            })
-        }
-        res.render('waiter', {
-            results: result,
-            workDays: await waiterCallBack.userDaysSelected(loggedIn),
-            Aweek: await waiterCallBack.DaysToPiickAt(loggedIn)
-        });
-    } catch (error) {
-        next(error);
-    }
-});
+app.post('/login', waiterRoutes.login);
 
-app.post('/waiters/:username', async function (req, res, next) {
-    try {
-        var Days = { Monday: req.body.Monday, Tuesday: req.body.Tuesday, Wednesday: req.body.Wednesday, Thursday: req.body.Thursday, Friday: req.body.Friday, Saturday: req.body.Saturday, Sunday: req.body.Sunday }
-        
-        console.log(Days)
+app.post('/waiters/:username', waiterRoutes.waiterDays)
 
-        await waiterCallBack.getSelected(Days, req.params.username)
-        var workDays = await waiterCallBack.userDaysSelected(req.params.username)
-        var results = await waiterCallBack.waiterFunction(req.params.username)
+app.post('/back/:username', waiterRoutes.back)
 
-        res.render('waiter', {
-            results,
-            workDays,
-            Aweek: await waiterCallBack.DaysToPiickAt(req.params.username)
-        })
-    } catch (error) {
-        next(error);
-    }
-});
+app.get('/signup', waiterRoutes.signup)
 
-app.post('/back/:username', function (req, res) {
-    res.redirect('/waiters/:username')
-});
+app.get('/home', waiterRoutes.redirect)
 
-app.get('/signup', function (req, res) {
-    res.render('signup')
-})
+app.get('/days', waiterRoutes.gettingDays)
 
-app.get('/home', function (req, res) {
-    res.redirect('/')
-});
+app.post('/days', waiterRoutes.allDays)
 
-app.get('/days', async function (req, res) {
-    res.render('days', {
-        workDays: await waiterCallBack.getAllDaysAvailable()
-    })
-});
+app.get('/days/:dayOfTheWeek', waiterRoutes.coloredDays)
 
-app.post('/days', function (req, res) {
-    res.render('days', {
-    })
-})
+app.post('/clear', waiterRoutes.deletes)
 
-app.get('/days/:dayOfTheWeek', async function (req, res) {
-    res.render('days', {
-        workDays: await waiterCallBack.getAllDaysAvailable()
-    })
-});
+app.post('/daysavailable/:daysavailable', waiterRoutes.availableDays)
 
-app.post('/clear', async function (req, res) {
-    await waiterCallBack.addColor()
-    res.render('days', {
-        workDays: await waiterCallBack.getAllDaysAvailable()
-    })
-});
+app.get('/back', waiterRoutes.redirectBack)
 
-app.post('/daysavailable/:daysavailable', async function (req, res) {
-    res.render('daysavailable', {
-        workDays: await waiterCallBack.getAllWaitersByDay(req.params.daysavailable)
-    })
-});
-
-app.get('/back', function (req, res) {
-    res.redirect('days')
-});
-
-app.post('/register', async function (req, res, next) {
-    try {
-        var newWaiter = req.body.newuser;
-        var newName = req.body.fullname;
-        if (newWaiter !== '' && newName !== '') {
-            await waiterCallBack.insertNewUser(newWaiter, newName)
-            req.flash('success', 'You are successfully added to the system of waiters')
-            res.redirect('/')
-        }
-    } catch (error) {
-        next(error);
-    }
-});
+app.post('/register', waiterRoutes.register)
 
 const PORT = process.env.PORT || 1616;
 app.listen(PORT, function () {
